@@ -1,0 +1,7 @@
+numpy
+librosa
+lyon
+matplotlib
+
+# Google Text-to-Speech
+gtts
