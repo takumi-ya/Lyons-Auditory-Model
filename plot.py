@@ -1,9 +1,11 @@
 import librosa
 import matplotlib.pyplot as plt
+import numpy as np
 
 from lyon.calc import LyonCalc
 
 y, sr = librosa.load("audio/zero.wav", sr=None)
+y = y.astype(np.float64)  # LyonCalc expects float64 input
 calc = LyonCalc()
 coch = calc.lyon_passive_ear(y, int(sr), decimation_factor=64)
 
