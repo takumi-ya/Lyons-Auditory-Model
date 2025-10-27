@@ -18,7 +18,7 @@ def plot_cochleagram(audio_path: str) -> None:
 
     base = os.path.splitext(os.path.basename(audio_path))[0]
     output_filename = f"cochleagram_{base}.png"
-    save_path = os.path.join("graph", output_filename)
+    save_path = os.path.join("fig", output_filename)
     plt.savefig(save_path)
     plt.close()
     print(f"Cochleagram saved to {save_path}")
