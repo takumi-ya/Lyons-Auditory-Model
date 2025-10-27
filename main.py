@@ -6,7 +6,7 @@ import numpy as np
 from lyon.calc import LyonCalc
 
 
-def preprocess_with_lyon(wav_path: str, decimation_factor: int = 64) -> np.ndarray:
+def preprocess_with_lyon(audio_path: str, decimation_factor: int = 64) -> np.ndarray:
     """
     Load a wav file, run Lyon's auditory model, and return the cochleagram.
     Parameters:
@@ -17,7 +17,7 @@ def preprocess_with_lyon(wav_path: str, decimation_factor: int = 64) -> np.ndarr
             where T’ ≈ (num_samples / decimation_factor), N_channels ≈ 86 (in default)
     """
     # 1. 音声読み込み
-    waveform, sr = librosa.load(wav_path, sr=None)  # sr=Noneで元レートを保持
+    waveform, sr = librosa.load(audio_path, sr=None)  # sr=Noneで元レートを保持
     print(f"Loaded waveform: length={len(waveform)}, sr={sr}")
 
     # 2. Lyon モデルの計算
