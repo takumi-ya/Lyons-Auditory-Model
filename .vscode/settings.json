@@ -1,0 +1,17 @@
+{
+    // ① 保存時フォーマット
+    "editor.formatOnSave": true,
+
+    // ② 保存時コードアクション（ここが有効だとRuffが直します）
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "never",
+        "source.fixAll.ruff": "never",
+        "source.organizeImports": "never"
+    },
+
+    // ③ Python のデフォルトフォーマッター（Ruffが入っているとここがruffになっていることがあります）
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter" // 例：Blackを使う場合
+        // → Ruffをフォーマッターにしたくないなら ruff を指定しない
+    }
+}
