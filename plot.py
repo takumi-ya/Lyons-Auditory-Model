@@ -1,19 +1,12 @@
 import os
 import sys
-import librosa
 import matplotlib.pyplot as plt
-import numpy as np
 
-
-from lyon.calc import LyonCalc
+from cochleagram_utils import compute_cochleagram
 
 
 def plot_cochleagram(audio_path: str) -> None:
-    y, sr = librosa.load(audio_path, sr=None)
-
-    y = y.astype(np.float64)  # LyonCalc expects float64 input
-    calc = LyonCalc()
-    coch = calc.lyon_passive_ear(y, int(sr), decimation_factor=64)
+    coch = compute_cochleagram(audio_path, decimation_factor=64)
 
     plt.figure(figsize=(10, 4))
     plt.imshow(coch.T, aspect="auto", origin="lower", cmap="magma")

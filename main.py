@@ -1,9 +1,9 @@
-import librosa
 import numpy as np
 
 # Lyon モデルの実装をインポート
 # 例えば pip install lyon でインストール可能なパッケージが存在します（GitHub “sciforce/lyon”） :contentReference[oaicite:4]{index=4}
-from lyon.calc import LyonCalc
+
+from cochleagram_utils import compute_cochleagram
 
 
 def preprocess_with_lyon(audio_path: str, decimation_factor: int = 64) -> np.ndarray:
@@ -16,17 +16,12 @@ def preprocess_with_lyon(audio_path: str, decimation_factor: int = 64) -> np.nda
         coch: np.ndarray of shape (T’, N_channels)
             where T’ ≈ (num_samples / decimation_factor), N_channels ≈ 86 (in default)
     """
-    # 1. 音声読み込み
-    waveform, sr = librosa.load(audio_path, sr=None)  # sr=Noneで元レートを保持
-    print(f"Loaded waveform: length={len(waveform)}, sr={sr}")
-
-    # 2. Lyon モデルの計算
-    calc = LyonCalc()
-    coch = calc.lyon_passive_ear(waveform, int(sr), decimation_factor)
+    # 1. 音声読み込み　Lyon モデルの計算
+    coch = compute_cochleagram(audio_path, decimation_factor)
     # coch の形状例： (T’, 86) など :contentReference[oaicite:5]{index=5}
     print(f"Cochleagram shape: {coch.shape}")
 
-    # 3. 必要に応じて正規化や切り出しなどを実施
+    # 2. 必要に応じて正規化や切り出しなどを実施
     # 例：チャネルごと平均0／分散1 にする
     coch_norm = (coch - np.mean(coch, axis=0, keepdims=True)) / (
         np.std(coch, axis=0, keepdims=True) + 1e-9
