@@ -1,7 +1,7 @@
 import os
-import sys
 import matplotlib.pyplot as plt
 
+from utils import get_audio_path
 from cochleagram_utils import compute_cochleagram
 
 
@@ -25,9 +25,5 @@ def plot_cochleagram(audio_path: str) -> None:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: plot.py <audio_file>")
-        sys.exit(1)
-
-    audio_file = sys.argv[1]
-    plot_cochleagram(audio_file)
+    audio_path = get_audio_path()
+    plot_cochleagram(audio_path)
