@@ -1,7 +1,5 @@
 import numpy as np
 
-# Lyon モデルの実装をインポート
-# 例えば pip install lyon でインストール可能なパッケージが存在します（GitHub “sciforce/lyon”） :contentReference[oaicite:4]{index=4}
 
 from cochleagram_utils import compute_cochleagram
 
