@@ -213,7 +213,7 @@ if __name__ == "__main__":
     for code, name in configs:
         preprocess_all_sph_for_words(
             train_root=train_root,
-            out_dir=f"npy/coch_{name}",  # 出力先フォルダ
+            out_dir=f"npy/train/coch_{name}",  # 出力先フォルダ
             word_codes=[code],  # 指定した単語コードのみ
             decimation_factor=64,
             delete_wav=True,  # .wav は一時ファイルとして削除
