@@ -1,11 +1,11 @@
 import glob
 from multiprocessing import Pool, cpu_count
 import os
-import subprocess
 import numpy as np
 
 
 from cochleagram_utils import compute_cochleagram
+from convert_to_wav import sph_to_wav
 
 
 def preprocess_with_lyon(audio_path: str, decimation_factor: int = 64) -> np.ndarray:
@@ -30,18 +30,6 @@ def preprocess_with_lyon(audio_path: str, decimation_factor: int = 64) -> np.nda
     )
 
     return coch_norm
-
-
-def sph_to_wav(sph_path: str) -> str:
-    """
-    Convert .sph file to .wav using 'sox' command.
-    Returns path to the generated .wav file.
-    """
-    wav_path = sph_path[:-4] + ".wav"
-    if not os.path.exists(wav_path):
-        # Run sox only if wac does not exist
-        subprocess.run(["sox", sph_path, wav_path], check=True)
-    return wav_path
 
 
 def _process_sph_worker(args):
