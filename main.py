@@ -217,15 +217,21 @@ def preprocess_all_sph_for_words(
 if __name__ == "__main__":
     train_root = "./audio/train"
 
-    # ZERO only (word code "00")
-    preprocess_all_sph_for_words(
-        train_root=train_root,
-        out_dir="npy/coch_zero",  # 出力先フォルダ
-        word_codes=["00"],  # ZEROのみ
-        decimation_factor=64,
-        delete_wav=True,  # .wav は一時ファイルとして削除
-        n_jobs=None,  # CPU数 - 1 を自動で使用
-        build_big_tensor=True,
-        big_tensor_name="dataset_zero.npz",
-    )
+    configs = [
+        ("00", "zero"),
+        ("01", "one"),
+    ]
+
+    for code, name in configs:
+        preprocess_all_sph_for_words(
+            train_root=train_root,
+            out_dir=f"npy/coch_{name}",  # 出力先フォルダ
+            word_codes=[code],  # 指定した単語コードのみ
+            decimation_factor=64,
+            delete_wav=True,  # .wav は一時ファイルとして削除
+            n_jobs=None,  # CPU数 - 1 を自動で使用
+            build_big_tensor=True,
+            big_tensor_name=f"dataset_{name}.npz",
+        )
+
     print("Done preprocessing.")
