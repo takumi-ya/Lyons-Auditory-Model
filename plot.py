@@ -1,6 +1,7 @@
 import os
 import matplotlib.pyplot as plt
 
+from convert_to_wav import sph_to_wav
 from utils import get_audio_path
 from cochleagram_utils import compute_cochleagram
 
@@ -49,6 +50,8 @@ def plot_single_channel(audio_path: str, channel_index: int) -> None:
 
 if __name__ == "__main__":
     audio_path = get_audio_path()
+    if audio_path[-4:] == ".sph":
+        audio_path = sph_to_wav(audio_path)
     plot_cochleagram(audio_path)
 
     plot_single_channel(audio_path, channel_index=10)
